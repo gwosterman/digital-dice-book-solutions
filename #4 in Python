@@ -1,0 +1,75 @@
+'''
+"Digital Dice", Problem 4,
+  odd man wins one penny from each of the
+  other two players, thus winner gets 2 cents,
+  losers each lose only one cent, how many flips
+  on average until someone goes out?
+'''
+
+import random                    
+flip_ct_tot = 0
+run_count = 0
+
+for run_count in range(0, 100):
+    l = 1                      #beginning coins of the 3 players
+    m = 1
+    n = 1
+
+    
+    flip_count = 0
+    
+    for x in range(1, 10):
+        flip1 = random.randint(0,1)
+        flip2 = random.randint(0,1)
+        flip3 = random.randint(0,1)
+        set = flip1, flip2, flip3
+        set_tot = (flip1+flip2+flip3)
+        if set_tot == 0:
+            l = l
+            m = m
+            n = n
+        if set_tot == 3:
+            l = l
+            m = m
+            n = n 
+        if set_tot == 1:
+            if flip1 == 1:
+                l = l+2
+            else:
+                l = l-1
+            if flip2 == 1:
+                m = m+2
+            else:
+                m = m-1
+            if flip3 == 1:
+                n = n+2
+            else:
+                n = n-1
+        if set_tot == 2:
+            if flip1 == 0:
+                l = l+2
+            else:
+                l = l-1
+            if flip2 == 0:
+                m = m+2
+            else:
+                m = m-1
+            if flip3 == 0:
+                n = n+2
+            else:
+                n = n-1
+        
+        flip_count += 1
+        flip_ct_tot += 1
+        print(set, set_tot)   
+        print('{0}, {1}, {2}'.format(l,m,n))
+        
+        if l==0 or m==0 or n==0: 
+            break
+    
+    print('The flip count is: {0}'.format(flip_count)) 
+
+run_count = run_count + 1
+print('The run count is: {0}'.format(run_count))
+print('The overall flip count is: {0}'.format(flip_ct_tot))       
+print('Average Flips/Runs = : {0}'.format(flip_ct_tot/run_count))
